@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* Main styles to format all */
+:root {
+  --black-primary: rgb(36, 36, 36);
+  --black-light: rgb(26, 26, 26);
+  --shadow: 0.1em 0 0.2em var(--black-primary);
+  --shadow-light: 0.1em 0 0.2em var(--black-light);
+}
+
+body {
+  background: rgb(31, 31, 31);
+}
+
+* {
+  margin: 0;
+  color: white;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Google Sans Code", monospace;
+}
+/* ############################################### */
+
+.container {
+  max-width: 1080px;
+  margin: 2em auto 0 auto;
+}
+.container .header_container{
+    margin: 1em 0;
+    padding: 1em 0;
+    border-bottom: .3em solid var(--black-primary);
+    filter: drop-shadow(var(--shadow-light));
+}
+.section_container {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+}
+.card {
+  background: var(--black-light);
+  border-radius: 10px;
+  box-shadow: var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 3/2;
+}
+
+.card .card_title {
+  z-index: 1;
+  position: absolute;
+  top: -1px;
+  right: 0;
+
+  width: 100%;
+
+  padding: 10px;
+  font-weight: bold;
+  background: var(--black-light);
+}
+.card .card_description_box {
+  transition: all;
+  transition-duration: 0.4s;
+  transition-timing-function: ease;
+
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  filter: blur(2px);
+  transform: scale(1.1);
+
+  position: absolute;
+  bottom: -100%;
+  right: 0;
+
+  width: 100%;
+  height: 50%;
+}
+.card .card_description {
+  transition: all;
+  transition-duration: 0.4s;
+  transition-timing-function: ease;
+
+  padding: 1.3em;
+  text-align: center;
+  font-size: 0.8em;
+
+  position: absolute;
+  bottom: -100%;
+  right: 0;
+
+  width: 100%;
+  height: 50%;
+}
+
+.card:hover .card_description,
+.card:hover .card_description_box {
+  bottom: -1px;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+  transition: all;
+  transition-duration: 0.4s;
+  transition-timing-function: ease;
+}

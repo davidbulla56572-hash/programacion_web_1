@@ -1,3 +1,4 @@
+/* Main styles to format all */
 :root{
     --black-primary: rgb(36, 36, 36);
     --black-light: rgb(26, 26, 26);
@@ -16,6 +17,7 @@ body{
     box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
 }
+/* ############################################### */
 
 .container{
     text-align: center;
