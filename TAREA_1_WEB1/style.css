@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    gap: 10px;
+}
+
+.container div h1{
+    filter: drop-shadow(1px 0px 2px rgba(0, 0, 0, 0.301));
+    color: aqua;
+}
+
+.boton{
+    border: none;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 2px;
+    font-weight: 600;
+    font-size: 30px;
+    cursor: pointer;
+    background: aqua;
+    transition: all;
+    animation-duration: 600ms;
+    animation-timing-function: ease-in-out;
+}
+.boton:hover{
+    background: gray;
+}
