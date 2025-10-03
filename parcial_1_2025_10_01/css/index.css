@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+}
+
+section {
+    background: #fff;
+    padding: 20px;
+    margin: 15px;
+
+    border-radius: 10px;
+}
+
+label {
+    display: block;
+    margin: 8px 0 4px;
+}
+
+input,
+select,
+button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    background: #007BFF;
+    color: white;
+    font-weight: bold;
+}
+
+.resultado {
+    font-weight: bold;
+    color: green;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
