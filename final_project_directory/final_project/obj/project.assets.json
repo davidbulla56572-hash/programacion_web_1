@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/bugzius/Documents/estudio/programacion_web_clases/2025-11-20/final_project/final_project.csproj",
+      "projectUniqueName": "/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/final_project.csproj",
       "projectName": "final_project",
-      "projectPath": "/home/bugzius/Documents/estudio/programacion_web_clases/2025-11-20/final_project/final_project.csproj",
+      "projectPath": "/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/final_project.csproj",
       "packagesPath": "/home/bugzius/.nuget/packages/",
-      "outputPath": "/home/bugzius/Documents/estudio/programacion_web_clases/2025-11-20/final_project/obj/",
+      "outputPath": "/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/bugzius/.nuget/NuGet/NuGet.Config"
