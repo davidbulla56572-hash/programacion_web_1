@@ -16,7 +16,6 @@ const labelsByConversionType = {
 }
 
 document.getElementById("btnConvertir").addEventListener("click", function () {
-    // TODO: Implementar validación y conversión
     setValueBoxHtml(errorConversionBoxHtml)
     setValueBoxHtml(resultConversionBoxHtml)
 
@@ -59,7 +58,6 @@ const resultBoxTmb = document.querySelector("#resultado2")
 const errorBoxTmb = document.querySelector("#error2")
 
 document.getElementById("btnCalcular").addEventListener("click", function () {
-    // TODO: Validar campos y calcular TMB
     // Limpia el HTML
     setValueBoxHtml(resultBoxTmb)
     setValueBoxHtml(errorBoxTmb)
@@ -70,6 +68,7 @@ document.getElementById("btnCalcular").addEventListener("click", function () {
     const yearsOld = (yearsOldHtml.value).trim()
     const name = (nameHtml.value).trim()
     const sex = sexHtml.value
+
     // Validar los valores
     if (
         sex === "" ||
@@ -101,6 +100,7 @@ document.getElementById("btnCalcular").addEventListener("click", function () {
             return (10 * weight) + (6.25 * height) - (5 * yearsOld) - 161
         }
     }
+
     // Mostrar reporte final de lo calculado
     const valueCalculated = (calculateTmb[sex])(height, weight, yearsOld).toFixed(2)
     const message = `Calorías necesarias en estado reposo: ${valueCalculated}`
