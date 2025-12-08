@@ -43,7 +43,7 @@ namespace final_project.Controllers
             // Gastos del mes actual usando LINQ
             var inicioMes = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             var finMes = inicioMes.AddMonths(1).AddDays(-1);
-            
+
             viewModel.TotalGastadoMes = await _context.Gastos
                 .Where(g => g.Fecha >= inicioMes && g.Fecha <= finMes)
                 .SumAsync(g => g.Monto);
@@ -64,8 +64,8 @@ namespace final_project.Controllers
             // Calcular presupuesto restante
             viewModel.PresupuestoTotal = viewModel.PresupuestoActivo?.MontoTotal ?? 0;
             viewModel.PresupuestoRestante = viewModel.PresupuestoTotal - viewModel.TotalGastado;
-            viewModel.PorcentajeUsado = viewModel.PresupuestoTotal > 0 
-                ? (viewModel.TotalGastado / viewModel.PresupuestoTotal) * 100 
+            viewModel.PorcentajeUsado = viewModel.PresupuestoTotal > 0
+                ? (viewModel.TotalGastado / viewModel.PresupuestoTotal) * 100
                 : 0;
 
             return View(viewModel);
@@ -87,11 +87,6 @@ namespace final_project.Controllers
             // Si hay errores, volver al dashboard con los datos
             TempData["Error"] = "Error al agregar el gasto. Verifica los datos.";
             return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
