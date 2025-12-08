@@ -1,0 +1,374 @@
+@model final_project.Models.Gasto
+
+@{
+    ViewData["Title"] = "Editar Gasto";
+}
+
+<style>
+    /* Estilos específicos para la vista de edición */
+    .form-control:focus, .form-select:focus {
+        border-color: #ffc107;
+        box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+    }
+    
+    .btn-warning:hover {
+        background-color: #ffca2c;
+        border-color: #ffc720;
+    }
+    
+    .input-group-text.warning-theme {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        color: #000;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 mb-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-action="Index">Gastos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Editar</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0">
+                    <i class="bi bi-pencil-square"></i> Editar Gasto
+                </h4>
+            </div>
+            <div class="card-body">
+                <!-- Información del gasto actual -->
+                <div class="alert alert-info mb-4">
+                    <i class="bi bi-info-circle"></i> 
+                    <strong>Editando gasto #@Model.Id</strong> 
+                    <span class="float-end">
+                        <small>Creado: @Model.Fecha.ToShortDateString()</small>
+                    </span>
+                </div>
+
+                <form asp-action="Edit" method="post" id="formEditarGasto">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                    
+                    <input type="hidden" asp-for="Id" />
+
+                    <!-- Descripción -->
+                    <div class="mb-3">
+                        <label asp-for="Descripcion" class="form-label">
+                            <i class="bi bi-card-text"></i> Descripción del Gasto
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Descripcion" 
+                               class="form-control" 
+                               placeholder="Ej: Almuerzo en restaurante"
+                               required
+                               maxlength="200" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                        <div class="form-text">
+                            <i class="bi bi-info-circle"></i> Describe brevemente en qué gastaste
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Monto -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Monto" class="form-label">
+                                    <i class="bi bi-cash-coin"></i> Monto
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text warning-theme">
+                                        <i class="bi bi-currency-dollar"></i>
+                                    </span>
+                                    <input asp-for="Monto" 
+                                           class="form-control" 
+                                           type="number" 
+                                           step="0.01" 
+                                           min="0.01"
+                                           placeholder="0.00"
+                                           required />
+                                </div>
+                                <span asp-validation-for="Monto" class="text-danger"></span>
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle"></i> Ingresa el monto exacto del gasto
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fecha -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Fecha" class="form-label">
+                                    <i class="bi bi-calendar-event"></i> Fecha del Gasto
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="Fecha" 
+                                       class="form-control" 
+                                       type="date" 
+                                       max="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                       required />
+                                <span asp-validation-for="Fecha" class="text-danger"></span>
+                                <div class="form-text">
+                                    <i class="bi bi-exclamation-triangle"></i> No puede ser una fecha futura
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría -->
+                    <div class="mb-3">
+                        <label asp-for="Categoria" class="form-label">
+                            <i class="bi bi-tag"></i> Categoría
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select asp-for="Categoria" class="form-select" required>
+                            <option value="">-- Seleccionar categoría --</option>
+                            <option value="Alimentación">🍔 Alimentación</option>
+                            <option value="Transporte">🚗 Transporte</option>
+                            <option value="Entretenimiento">🎬 Entretenimiento</option>
+                            <option value="Salud">💊 Salud</option>
+                            <option value="Servicios">💡 Servicios</option>
+                            <option value="Educación">📚 Educación</option>
+                            <option value="Vivienda">🏠 Vivienda</option>
+                            <option value="Ropa">👕 Ropa</option>
+                            <option value="Tecnología">💻 Tecnología</option>
+                            <option value="Otros">📦 Otros</option>
+                        </select>
+                        <span asp-validation-for="Categoria" class="text-danger"></span>
+                        <div class="form-text">
+                            <i class="bi bi-info-circle"></i> Selecciona la categoría que mejor describa este gasto
+                        </div>
+                    </div>
+
+                    <!-- Notas -->
+                    <div class="mb-3">
+                        <label asp-for="Notas" class="form-label">
+                            <i class="bi bi-journal-text"></i> Notas Adicionales
+                            <span class="text-muted">(Opcional)</span>
+                        </label>
+                        <textarea asp-for="Notas" 
+                                  class="form-control" 
+                                  rows="4" 
+                                  maxlength="500"
+                                  placeholder="Agrega detalles adicionales sobre este gasto..."></textarea>
+                        <span asp-validation-for="Notas" class="text-danger"></span>
+                        <div class="form-text">
+                            <i class="bi bi-info-circle"></i> Puedes agregar información adicional que consideres relevante
+                        </div>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <!-- Información adicional -->
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <div class="alert alert-warning">
+                                <i class="bi bi-exclamation-triangle-fill"></i> 
+                                <strong>Importante:</strong> 
+                                Los cambios en este gasto afectarán las estadísticas y el cálculo de tu presupuesto.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                        <div>
+                            <a asp-action="Delete" 
+                               asp-route-id="@Model.Id" 
+                               class="btn btn-danger"
+                               data-bs-toggle="tooltip" 
+                               data-bs-placement="top" 
+                               title="Eliminar este gasto permanentemente">
+                                <i class="bi bi-trash"></i> Eliminar Gasto
+                            </a>
+                        </div>
+                        <div>
+                            <a asp-action="Index" 
+                               class="btn btn-secondary me-2"
+                               data-bs-toggle="tooltip" 
+                               data-bs-placement="top" 
+                               title="Volver sin guardar cambios">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                            <a asp-action="Details" 
+                               asp-route-id="@Model.Id" 
+                               class="btn btn-info me-2"
+                               data-bs-toggle="tooltip" 
+                               data-bs-placement="top" 
+                               title="Ver detalles completos">
+                                <i class="bi bi-eye"></i> Ver Detalles
+                            </a>
+                            <button type="submit" 
+                                    class="btn btn-warning"
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    title="Guardar los cambios realizados">
+                                <i class="bi bi-save"></i> Guardar Cambios
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tarjeta de estadísticas del gasto -->
+        <div class="card mt-4 border-info">
+            <div class="card-header bg-info text-white">
+                <h6 class="mb-0">
+                    <i class="bi bi-graph-up"></i> Información del Registro
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-2">
+                            <strong><i class="bi bi-hash"></i> ID del Gasto:</strong> 
+                            <span class="badge bg-secondary">#@Model.Id</span>
+                        </p>
+                        <p class="mb-2">
+                            <strong><i class="bi bi-calendar-check"></i> Fecha Original:</strong> 
+                            @Model.Fecha.ToLongDateString()
+                        </p>
+                        <p class="mb-2">
+                            <strong><i class="bi bi-tag"></i> Categoría Actual:</strong> 
+                            <span class="badge bg-primary">@Model.Categoria</span>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="mb-2">
+                            <strong><i class="bi bi-cash-stack"></i> Monto Actual:</strong> 
+                            <span class="text-danger fs-5">@Model.Monto.ToString("C")</span>
+                        </p>
+                        @if (!string.IsNullOrEmpty(Model.Notas))
+                        {
+                            <p class="mb-2">
+                                <strong><i class="bi bi-journal"></i> Tiene notas:</strong> 
+                                <span class="badge bg-success">Sí</span>
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="mb-2">
+                                <strong><i class="bi bi-journal"></i> Tiene notas:</strong> 
+                                <span class="badge bg-secondary">No</span>
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de ayuda -->
+        <div class="card mt-4 border-warning">
+            <div class="card-header bg-warning">
+                <h6 class="mb-0">
+                    <i class="bi bi-lightbulb"></i> Consejos de Edición
+                </h6>
+            </div>
+            <div class="card-body">
+                <ul class="mb-0">
+                    <li>Verifica que el <strong>monto</strong> sea correcto antes de guardar</li>
+                    <li>Asegúrate de que la <strong>categoría</strong> refleje realmente el tipo de gasto</li>
+                    <li>La <strong>fecha</strong> debe corresponder al día en que realizaste el gasto</li>
+                    <li>Usa las <strong>notas</strong> para recordar detalles importantes del gasto</li>
+                    <li>Los cambios afectarán inmediatamente tus estadísticas y presupuesto</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Botón de regreso alternativo -->
+        <div class="d-grid gap-2 mt-4">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver a la Lista de Gastos
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Script específico para la edición de gastos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Resaltar campos modificados
+            const form = document.getElementById('formEditarGasto');
+            const campos = form.querySelectorAll('input, select, textarea');
+            
+            // Guardar valores originales
+            const valoresOriginales = new Map();
+            campos.forEach(campo => {
+                valoresOriginales.set(campo.name, campo.value);
+            });
+            
+            // Detectar cambios
+            campos.forEach(campo => {
+                campo.addEventListener('change', function() {
+                    if (this.value !== valoresOriginales.get(this.name)) {
+                        this.style.borderColor = '#ffc107';
+                        this.style.borderWidth = '2px';
+                    } else {
+                        this.style.borderColor = '';
+                        this.style.borderWidth = '';
+                    }
+                });
+            });
+            
+            // Advertencia al salir sin guardar
+            let formModificado = false;
+            campos.forEach(campo => {
+                campo.addEventListener('change', function() {
+                    formModificado = true;
+                });
+            });
+            
+            // Enlaces de cancelar y salir
+            const enlacesCancelar = document.querySelectorAll('a[href*="Index"], a.btn-secondary');
+            enlacesCancelar.forEach(enlace => {
+                enlace.addEventListener('click', function(e) {
+                    if (formModificado) {
+                        const confirmar = confirm('⚠️ Tienes cambios sin guardar. ¿Estás seguro de que deseas salir?');
+                        if (!confirmar) {
+                            e.preventDefault();
+                        }
+                    }
+                });
+            });
+            
+            // Al enviar el formulario, marcar como guardado
+            form.addEventListener('submit', function() {
+                formModificado = false;
+            });
+            
+            // Validación adicional del monto
+            const inputMonto = document.getElementById('Monto');
+            if (inputMonto) {
+                inputMonto.addEventListener('input', function() {
+                    const valor = parseFloat(this.value);
+                    if (valor <= 0) {
+                        this.setCustomValidity('El monto debe ser mayor a 0');
+                    } else if (valor > 999999999.99) {
+                        this.setCustomValidity('El monto es demasiado alto');
+                    } else {
+                        this.setCustomValidity('');
+                    }
+                });
+            }
+            
+            // Inicializar tooltips
+            const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            tooltips.forEach(tooltip => {
+                new bootstrap.Tooltip(tooltip);
+            });
+            
+            console.log('✅ Vista de edición de gastos cargada correctamente');
+        });
+    </script>
+}

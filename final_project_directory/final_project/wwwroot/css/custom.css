@@ -1,0 +1,312 @@
+/* ============================================
+   GESTOR DE GASTOS - ESTILOS PERSONALIZADOS
+   ============================================ */
+
+/* Variables de colores */
+:root {
+    --primary-color: #0d6efd;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+}
+
+/* Mejoras generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Tarjetas de estadísticas mejoradas */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tarjetas de estadísticas con animación */
+.card.text-white {
+    border: none;
+    background: linear-gradient(135deg, var(--primary-color), #0b5ed7);
+}
+
+.card.bg-danger {
+    background: linear-gradient(135deg, #dc3545, #bb2d3b) !important;
+}
+
+.card.bg-success {
+    background: linear-gradient(135deg, #198754, #146c43) !important;
+}
+
+.card.bg-warning {
+    background: linear-gradient(135deg, #ffc107, #ffca2c) !important;
+    color: #000 !important;
+}
+
+.card.bg-info {
+    background: linear-gradient(135deg, #0dcaf0, #31d2f2) !important;
+}
+
+/* Iconos con animación */
+.bi {
+    transition: transform 0.2s;
+}
+
+.card:hover .bi {
+    transform: scale(1.1);
+}
+
+/* Tablas mejoradas */
+.table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead {
+    background: linear-gradient(135deg, #495057, #6c757d);
+    color: white;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+/* Badges mejorados */
+.badge {
+    padding: 0.5em 0.8em;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+/* Botones mejorados */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-group .btn {
+    margin: 0 2px;
+}
+
+/* Formularios mejorados */
+.form-control,
+.form-select {
+    border-radius: 6px;
+    border: 2px solid #dee2e6;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* Alertas mejoradas */
+.alert {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert-dismissible .btn-close {
+    padding: 0.75rem;
+}
+
+/* Barra de progreso mejorada */
+.progress {
+    border-radius: 10px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    border-radius: 10px;
+    transition: width 0.6s ease;
+    font-weight: 600;
+}
+
+/* Animación de entrada para tarjetas */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card,
+.alert {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Navbar mejorado */
+.navbar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--primary-color) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Footer mejorado */
+.footer {
+    background-color: white;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+/* List groups mejorados */
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+    transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* Input groups mejorados */
+.input-group-text {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    font-weight: 600;
+}
+
+/* Validación de formularios */
+.is-invalid {
+    border-color: var(--danger-color) !important;
+}
+
+.invalid-feedback {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--danger-color);
+    margin-top: 0.25rem;
+}
+
+.is-valid {
+    border-color: var(--success-color) !important;
+}
+
+/* Tooltips y popovers */
+.form-text {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+/* Spinner de carga */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card h2 {
+        font-size: 1.5rem;
+    }
+
+    .table {
+        font-size: 0.875rem;
+    }
+
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        margin: 2px 0;
+    }
+}
+
+/* Efecto de carga */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Categorías con colores */
+.badge.categoria-alimentacion {
+    background-color: #ff6b6b;
+}
+
+.badge.categoria-transporte {
+    background-color: #4ecdc4;
+}
+
+.badge.categoria-entretenimiento {
+    background-color: #95e1d3;
+}
+
+.badge.categoria-salud {
+    background-color: #f38181;
+}
+
+.badge.categoria-servicios {
+    background-color: #feca57;
+}
+
+.badge.categoria-educacion {
+    background-color: #48dbfb;
+}
+
+.badge.categoria-vivienda {
+    background-color: #ff9ff3;
+}
+
+.badge.categoria-ropa {
+    background-color: #54a0ff;
+}
+
+.badge.categoria-tecnologia {
+    background-color: #5f27cd;
+    color: white;
+}
+
+.badge.categoria-otros {
+    background-color: #6c757d;
+}

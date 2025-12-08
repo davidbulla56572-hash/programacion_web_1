@@ -1,0 +1,215 @@
+@model final_project.ViewModels.PresupuestoIndexViewModel
+
+@{
+    ViewData["Title"] = "Presupuesto";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4"><i class="bi bi-piggy-bank-fill"></i> Mi Presupuesto</h1>
+    </div>
+</div>
+
+@if (Model.PresupuestoActivo != null)
+{
+    <!-- Presupuesto Activo -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-check-circle"></i> Presupuesto Activo</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Información del Presupuesto</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <th><i class="bi bi-wallet2"></i> Monto Total:</th>
+                                    <td class="text-end"><strong class="text-primary">$@Model.PresupuestoActivo.MontoTotal.ToString("N2")</strong></td>
+                                </tr>
+                                <tr>
+                                    <th><i class="bi bi-calendar-check"></i> Fecha de Inicio:</th>
+                                    <td class="text-end">@Model.PresupuestoActivo.FechaInicio.ToShortDateString()</td>
+                                </tr>
+                                <tr>
+                                    <th><i class="bi bi-calendar-x"></i> Fecha de Fin:</th>
+                                    <td class="text-end">@Model.PresupuestoActivo.FechaFin.ToShortDateString()</td>
+                                </tr>
+                                <tr>
+                                    <th><i class="bi bi-clock"></i> Días Restantes:</th>
+                                    <td class="text-end">
+                                        <span class="badge @(Model.DiasRestantes < 7 ? "bg-warning" : "bg-info")">
+                                            @Model.DiasRestantes día(s)
+                                        </span>
+                                    </td>
+                                </tr>
+                                @if (!string.IsNullOrEmpty(Model.PresupuestoActivo.Descripcion))
+                                {
+                                    <tr>
+                                        <th><i class="bi bi-chat-left-text"></i> Descripción:</th>
+                                        <td class="text-end">@Model.PresupuestoActivo.Descripcion</td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Resumen de Gastos</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <th><i class="bi bi-arrow-down-circle"></i> Total Gastado:</th>
+                                    <td class="text-end"><strong class="text-danger">$@Model.TotalGastado.ToString("N2")</strong></td>
+                                </tr>
+                                <tr>
+                                    <th><i class="bi bi-arrow-up-circle"></i> Restante:</th>
+                                    <td class="text-end">
+                                        <strong class="@(Model.Restante >= 0 ? "text-success" : "text-warning")">
+                                            $@Model.Restante.ToString("N2")
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><i class="bi bi-percent"></i> Porcentaje Usado:</th>
+                                    <td class="text-end">
+                                        <span class="badge @(Model.PorcentajeUsado > 90 ? "bg-danger" : Model.PorcentajeUsado > 70 ? "bg-warning" : "bg-success")">
+                                            @Model.PorcentajeUsado.ToString("N1")%
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><i class="bi bi-list-ol"></i> Cantidad de Gastos:</th>
+                                    <td class="text-end">@Model.CantidadGastos gasto(s)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Barra de Progreso -->
+                    <div class="mt-3">
+                        <h6>Progreso del Presupuesto</h6>
+                        <div class="progress" style="height: 30px;">
+                            <div class="progress-bar @(Model.PorcentajeUsado > 90 ? "bg-danger" : Model.PorcentajeUsado > 70 ? "bg-warning" : "bg-success")" 
+                                 role="progressbar" 
+                                 style="width: @Math.Min(Model.PorcentajeUsado, 100)%" 
+                                 aria-valuenow="@Model.PorcentajeUsado" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100">
+                                @Model.PorcentajeUsado.ToString("N1")% utilizado
+                            </div>
+                        </div>
+                        <small class="text-muted mt-2">
+                            @if (Model.PorcentajeUsado > 100)
+                            {
+                                <span class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Has excedido tu presupuesto</span>
+                            }
+                            else if (Model.PorcentajeUsado > 90)
+                            {
+                                <span class="text-warning"><i class="bi bi-exclamation-triangle"></i> Estás cerca del límite</span>
+                            }
+                            else if (Model.PorcentajeUsado > 70)
+                            {
+                                <span class="text-warning"><i class="bi bi-exclamation-circle"></i> Controla tus gastos</span>
+                            }
+                            else
+                            {
+                                <span class="text-success"><i class="bi bi-check-circle"></i> Vas muy bien</span>
+                            }
+                        </small>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="mt-4">
+                        <a asp-action="Edit" asp-route-id="@Model.PresupuestoActivo.Id" class="btn btn-warning">
+                            <i class="bi bi-pencil"></i> Editar Presupuesto
+                        </a>
+                        <a asp-controller="Gastos" asp-action="Index" class="btn btn-info">
+                            <i class="bi bi-list-ul"></i> Ver Gastos del Periodo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <!-- Sin Presupuesto Activo -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="alert alert-warning">
+                <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> No hay presupuesto activo</h4>
+                <p>No tienes ningún presupuesto activo en este momento. Crea uno para comenzar a controlar tus gastos.</p>
+                <hr>
+                <a asp-action="Create" class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> Crear Presupuesto
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Historial de Presupuestos -->
+@if (Model.HistorialPresupuestos.Any())
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0"><i class="bi bi-clock-history"></i> Historial de Presupuestos</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Periodo</th>
+                                    <th>Monto</th>
+                                    <th>Descripción</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var presupuesto in Model.HistorialPresupuestos)
+                                {
+                                    <tr>
+                                        <td>
+                                            <small>
+                                                @presupuesto.FechaInicio.ToShortDateString() - 
+                                                @presupuesto.FechaFin.ToShortDateString()
+                                            </small>
+                                        </td>
+                                        <td><strong>$@presupuesto.MontoTotal.ToString("N2")</strong></td>
+                                        <td>@(presupuesto.Descripcion ?? "Sin descripción")</td>
+                                        <td>
+                                            @if (presupuesto.Activo)
+                                            {
+                                                <span class="badge bg-success">Activo</span>
+                                            }
+                                            else if (presupuesto.FechaFin < DateTime.Now)
+                                            {
+                                                <span class="badge bg-secondary">Finalizado</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning">Inactivo</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@presupuesto.Id" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@presupuesto.Id" class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

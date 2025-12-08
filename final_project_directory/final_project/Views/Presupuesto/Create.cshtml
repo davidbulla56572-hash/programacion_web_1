@@ -1,0 +1,117 @@
+@model final_project.Models.Presupuesto
+
+@{
+    ViewData["Title"] = "Crear Presupuesto";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4"><i class="bi bi-plus-circle"></i> Crear Nuevo Presupuesto</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="bi bi-cash-stack"></i> Información del Presupuesto</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="MontoTotal" class="form-label">
+                            <i class="bi bi-wallet2"></i> Monto Total del Presupuesto
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input asp-for="MontoTotal" class="form-control" placeholder="Ej: 1000.00" step="0.01" />
+                        </div>
+                        <span asp-validation-for="MontoTotal" class="text-danger"></span>
+                        <small class="form-text text-muted">
+                            <i class="bi bi-info-circle"></i> Ingresa el monto total que planeas gastar en este periodo
+                        </small>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FechaInicio" class="form-label">
+                                <i class="bi bi-calendar-check"></i> Fecha de Inicio
+                            </label>
+                            <input asp-for="FechaInicio" class="form-control" type="date" />
+                            <span asp-validation-for="FechaInicio" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FechaFin" class="form-label">
+                                <i class="bi bi-calendar-x"></i> Fecha de Fin
+                            </label>
+                            <input asp-for="FechaFin" class="form-control" type="date" />
+                            <span asp-validation-for="FechaFin" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Descripcion" class="form-label">
+                            <i class="bi bi-chat-left-text"></i> Descripción (Opcional)
+                        </label>
+                        <textarea asp-for="Descripcion" class="form-control" rows="3" placeholder="Ej: Presupuesto mensual de enero"></textarea>
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                        <small class="form-text text-muted">
+                            <i class="bi bi-info-circle"></i> Agrega notas o detalles sobre este presupuesto
+                        </small>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input asp-for="Activo" class="form-check-input" type="checkbox" checked />
+                        <label asp-for="Activo" class="form-check-label">
+                            <i class="bi bi-check-circle"></i> Establecer como presupuesto activo
+                        </label>
+                        <span asp-validation-for="Activo" class="text-danger"></span>
+                        <br>
+                        <small class="form-text text-muted">
+                            <i class="bi bi-exclamation-circle"></i> Si activas este presupuesto, los demás se desactivarán automáticamente
+                        </small>
+                    </div>
+
+                    <hr>
+
+                    <div class="alert alert-info">
+                        <i class="bi bi-lightbulb"></i> <strong>Consejo:</strong> 
+                        Establece un presupuesto realista basado en tus ingresos y gastos habituales. 
+                        Puedes crear presupuestos mensuales, quincenales o personalizados según tus necesidades.
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-save"></i> Crear Presupuesto
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Card de Ayuda -->
+        <div class="card mt-4 border-info">
+            <div class="card-header bg-info text-white">
+                <h6 class="mb-0"><i class="bi bi-question-circle"></i> ¿Cómo funciona?</h6>
+            </div>
+            <div class="card-body">
+                <ul class="mb-0">
+                    <li>Define el <strong>monto total</strong> que planeas gastar en el periodo</li>
+                    <li>Selecciona las <strong>fechas de inicio y fin</strong> del presupuesto</li>
+                    <li>Marca como <strong>activo</strong> para que aparezca en el dashboard</li>
+                    <li>El sistema calculará automáticamente cuánto has gastado y cuánto te queda</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

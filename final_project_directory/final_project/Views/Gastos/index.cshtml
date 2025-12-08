@@ -1,0 +1,210 @@
+@model IEnumerable<final_project.Models.Gasto>
+
+@{
+    ViewData["Title"] = "Lista de Gastos";
+    var totalGastado = ViewBag.TotalGastado != null ? (decimal)ViewBag.TotalGastado : 0m;
+    var presupuestoTotal = ViewBag.PresupuestoTotal != null ? (decimal)ViewBag.PresupuestoTotal : 0m;
+    var presupuestoRestante = ViewBag.PresupuestoRestante != null ? (decimal)ViewBag.PresupuestoRestante : 0m;
+    var gastosPorCategoria = ViewBag.GastosPorCategoria as IEnumerable<dynamic>;
+}
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1>
+            <i class="bi bi-list-ul"></i> Lista de Gastos
+        </h1>
+    </div>
+</div>
+
+<!-- Resumen de Estadísticas -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-danger">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-cash-coin"></i> Total Gastado</h5>
+                <h2>@totalGastado.ToString("C")</h2>
+                <small>@(Model?.Count() ?? 0) gastos en total</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-wallet2"></i> Presupuesto Total</h5>
+                <h2>
+                    @if (presupuestoTotal > 0)
+                    {
+                        @presupuestoTotal.ToString("C")
+                    }
+                    else
+                    {
+                        <span class="small">No definido</span>
+                    }
+                </h2>
+                <small>Presupuesto actual</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white @(presupuestoRestante >= 0 ? "bg-success" : "bg-warning")">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-piggy-bank"></i> Presupuesto Restante</h5>
+                <h2>@presupuestoRestante.ToString("C")</h2>
+                <small>@((presupuestoTotal > 0 ? (totalGastado / presupuestoTotal * 100) : 0).ToString("F1"))% usado</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gastos por Categoría -->
+@if (gastosPorCategoria != null && gastosPorCategoria.Any())
+{
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="bi bi-pie-chart-fill"></i> Gastos por Categoría</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Categoría</th>
+                                    <th class="text-end">Cantidad</th>
+                                    <th class="text-end">Total</th>
+                                    <th>Porcentaje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var cat in gastosPorCategoria)
+                                {
+                                    var porcentaje = totalGastado > 0 ? (cat.Total / totalGastado * 100) : 0;
+                                    <tr>
+                                        <td><span class="badge bg-secondary">@cat.Categoria</span></td>
+                                        <td class="text-end">@cat.Cantidad</td>
+                                        <td class="text-end"><strong>@cat.Total.ToString("C")</strong></td>
+                                        <td>
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar bg-info" 
+                                                     role="progressbar" 
+                                                     style="width: @porcentaje%;" 
+                                                     aria-valuenow="@porcentaje" 
+                                                     aria-valuemin="0" 
+                                                     aria-valuemax="100">
+                                                    @porcentaje.ToString("F1")%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Botón Crear Nuevo -->
+<div class="row mb-3">
+    <div class="col-md-12">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nuevo Gasto
+        </a>
+    </div>
+</div>
+
+<!-- Tabla de Gastos -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Todos los Gastos</h5>
+            </div>
+            <div class="card-body">
+                @if (Model != null && Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Descripción</th>
+                                    <th>Categoría</th>
+                                    <th class="text-end">Monto</th>
+                                    <th>Notas</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var gasto in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <i class="bi bi-calendar"></i>
+                                            @gasto.Fecha.ToString("dd/MM/yyyy")
+                                        </td>
+                                        <td><strong>@gasto.Descripcion</strong></td>
+                                        <td>
+                                            <span class="badge bg-secondary">@gasto.Categoria</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <strong class="text-danger">@gasto.Monto.ToString("C")</strong>
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(gasto.Notas))
+                                            {
+                                                <small class="text-muted">
+                                                    @(gasto.Notas.Length > 30 ? gasto.Notas.Substring(0, 30) + "..." : gasto.Notas)
+                                                </small>
+                                            }
+                                            else
+                                            {
+                                                <small class="text-muted">-</small>
+                                            }
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="btn-group" role="group">
+                                                <a asp-action="Details" asp-route-id="@gasto.Id" 
+                                                   class="btn btn-sm btn-info" 
+                                                   title="Ver Detalles">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a asp-action="Edit" asp-route-id="@gasto.Id" 
+                                                   class="btn btn-sm btn-warning" 
+                                                   title="Editar">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <a asp-action="Delete" asp-route-id="@gasto.Id" 
+                                                   class="btn btn-sm btn-danger" 
+                                                   title="Eliminar">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr class="table-secondary">
+                                    <td colspan="3"><strong>TOTAL</strong></td>
+                                    <td class="text-end"><strong>@totalGastado.ToString("C")</strong></td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info" role="alert">
+                        <i class="bi bi-info-circle"></i> No hay gastos registrados. 
+                        <a asp-action="Create" class="alert-link">Crea tu primer gasto aquí</a>.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

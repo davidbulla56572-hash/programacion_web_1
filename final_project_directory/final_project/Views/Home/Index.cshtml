@@ -1,8 +1,228 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model final_project.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4"><i class="bi bi-speedometer2"></i> Dashboard de Gastos</h1>
+    </div>
 </div>
+
+<!-- Tarjetas de Estadísticas -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-wallet2"></i> Presupuesto Total</h5>
+                <h2 class="card-text">$@Model.PresupuestoTotal.ToString("N2")</h2>
+                @if (Model.PresupuestoActivo != null)
+                {
+                    <small>Válido hasta @Model.PresupuestoActivo.FechaFin.ToShortDateString()</small>
+                }
+                else
+                {
+                    <small class="text-warning">⚠️ Sin presupuesto activo</small>
+                }
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-arrow-down-circle"></i> Total Gastado</h5>
+                <h2 class="card-text">$@Model.TotalGastado.ToString("N2")</h2>
+                <small>@Model.CantidadGastos gasto(s) registrado(s)</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white @(Model.PresupuestoRestante >= 0 ? "bg-success" : "bg-warning") mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-arrow-up-circle"></i> Restante</h5>
+                <h2 class="card-text">$@Model.PresupuestoRestante.ToString("N2")</h2>
+                @if (Model.PresupuestoRestante < 0)
+                {
+                    <small>⚠️ Has excedido tu presupuesto</small>
+                }
+                else
+                {
+                    <small>Disponible para gastar</small>
+                }
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-calendar-month"></i> Gasto del Mes</h5>
+                <h2 class="card-text">$@Model.TotalGastadoMes.ToString("N2")</h2>
+                <small>Mes de @DateTime.Now.ToString("MMMM")</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Barra de Progreso del Presupuesto -->
+@if (Model.PresupuestoActivo != null)
+{
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-graph-up"></i> Uso del Presupuesto</h5>
+                    <div class="progress" style="height: 30px;">
+                        <div class="progress-bar @(Model.PorcentajeUsado > 90 ? "bg-danger" : Model.PorcentajeUsado > 70 ? "bg-warning" : "bg-success")" 
+                             role="progressbar" 
+                             style="width: @Math.Min(Model.PorcentajeUsado, 100)%" 
+                             aria-valuenow="@Model.PorcentajeUsado" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                            @Model.PorcentajeUsado.ToString("N1")%
+                        </div>
+                    </div>
+                    <small class="text-muted mt-2">
+                        @if (Model.PorcentajeUsado > 90)
+                        {
+                            <span class="text-danger">⚠️ Cuidado, estás cerca del límite de tu presupuesto</span>
+                        }
+                        else if (Model.PorcentajeUsado > 70)
+                        {
+                            <span class="text-warning">⚠️ Has usado más del 70% de tu presupuesto</span>
+                        }
+                        else
+                        {
+                            <span class="text-success">✓ Vas bien con tu presupuesto</span>
+                        }
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <!-- Formulario de Gasto Rápido -->
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5><i class="bi bi-plus-circle"></i> Agregar Gasto Rápido</h5>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Home" asp-action="AgregarGastoRapido" method="post">
+                    <div class="mb-3">
+                        <label for="Descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="Descripcion" name="Descripcion" required placeholder="Ej: Almuerzo en restaurante">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Monto" class="form-label">Monto ($)</label>
+                        <input type="number" step="0.01" class="form-control" id="Monto" name="Monto" required placeholder="0.00">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Categoria" class="form-label">Categoría</label>
+                        <select class="form-select" id="Categoria" name="Categoria" required>
+                            <option value="">Selecciona una categoría</option>
+                            <option value="Alimentación">Alimentación</option>
+                            <option value="Transporte">Transporte</option>
+                            <option value="Entretenimiento">Entretenimiento</option>
+                            <option value="Servicios">Servicios</option>
+                            <option value="Salud">Salud</option>
+                            <option value="Educación">Educación</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Fecha" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="Fecha" name="Fecha" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-save"></i> Guardar Gasto
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel Derecho -->
+    <div class="col-md-6">
+        <!-- Últimos Gastos -->
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h5><i class="bi bi-clock-history"></i> Últimos 5 Gastos</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.UltimosGastos.Any())
+                {
+                    <div class="list-group list-group-flush">
+                        @foreach (var gasto in Model.UltimosGastos)
+                        {
+                            <div class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">@gasto.Descripcion</div>
+                                    <small class="text-muted">
+                                        <i class="bi bi-tag"></i> @gasto.Categoria | 
+                                        <i class="bi bi-calendar"></i> @gasto.Fecha.ToShortDateString()
+                                    </small>
+                                </div>
+                                <span class="badge bg-danger rounded-pill">$@gasto.Monto.ToString("N2")</span>
+                            </div>
+                        }
+                    </div>
+                    <div class="mt-3">
+                        <a asp-controller="Gastos" asp-action="Index" class="btn btn-outline-primary btn-sm w-100">
+                            Ver Todos los Gastos <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info mb-0">
+                        <i class="bi bi-info-circle"></i> No hay gastos registrados aún. ¡Agrega tu primer gasto!
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Top Categorías -->
+        @if (Model.TopCategorias != null && Model.TopCategorias.Any())
+        {
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5><i class="bi bi-trophy"></i> Top Categorías</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        @foreach (var cat in Model.TopCategorias)
+                        {
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>@cat.Categoria</strong>
+                                    <br />
+                                    <small class="text-muted">@cat.Cantidad gasto(s)</small>
+                                </div>
+                                <span class="badge bg-success rounded-pill">$@cat.Total.ToString("N2")</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (Model.PresupuestoActivo == null)
+{
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle-fill"></i> 
+                <strong>¡Atención!</strong> No tienes un presupuesto activo. 
+                <a asp-controller="Presupuesto" asp-action="Create" class="alert-link">Haz clic aquí para crear uno</a>.
+            </div>
+        </div>
+    </div>
+}

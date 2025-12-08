@@ -1,0 +1,81 @@
+@model final_project.Models.Gasto
+
+@{
+    ViewData["Title"] = "Eliminar Gasto";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-trash"></i> Eliminar Gasto
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <strong>¡Atención!</strong> ¿Estás seguro de que deseas eliminar este gasto? Esta acción no se puede deshacer.
+                </div>
+
+                <h5 class="mb-3">Detalles del gasto a eliminar:</h5>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-md-4"><strong>Descripción:</strong></div>
+                            <div class="col-md-8">@Model.Descripcion</div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4"><strong>Monto:</strong></div>
+                            <div class="col-md-8">
+                                <span class="text-danger fs-5">@Model.Monto.ToString("C")</span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4"><strong>Categoría:</strong></div>
+                            <div class="col-md-8">
+                                <span class="badge bg-secondary">@Model.Categoria</span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4"><strong>Fecha:</strong></div>
+                            <div class="col-md-8">
+                                <i class="bi bi-calendar"></i> @Model.Fecha.ToString("dd/MM/yyyy")
+                            </div>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(Model.Notas))
+                        {
+                            <div class="row">
+                                <div class="col-md-4"><strong>Notas:</strong></div>
+                                <div class="col-md-8">
+                                    <p class="text-muted mb-0">@Model.Notas</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">
+                            <i class="bi bi-eye"></i> Ver Detalles
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Confirmar Eliminación
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
