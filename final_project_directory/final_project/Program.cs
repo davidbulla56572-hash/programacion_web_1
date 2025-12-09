@@ -1,7 +1,13 @@
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 using final_project.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var cultureInfo = new CultureInfo("es-CO");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 // Configurar Npgsql para manejar DateTime sin zona horaria
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -14,6 +20,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
+
+var supportedCultures = new[] { cultureInfo };
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(cultureInfo),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
 
 // Crear la base de datos automáticamente
 using (var scope = app.Services.CreateScope())
