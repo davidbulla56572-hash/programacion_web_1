@@ -15,6 +15,29 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
+// Crear la base de datos automáticamente
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    try
+    {
+        // Esto crea la BD y todas las tablas basadas en tu DbContext
+        context.Database.EnsureCreated();
+        Console.WriteLine("✓ Conexión exitosa a PostgreSQL");
+        Console.WriteLine("✓ Base de datos 'final_project' lista");
+    }
+    catch (Npgsql.PostgresException ex)
+    {
+        Console.WriteLine($"✗ Error de PostgreSQL: {ex.Message}");
+        Console.WriteLine($"   Verifica que PostgreSQL esté corriendo y las credenciales sean correctas");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"✗ Error al conectar con la base de datos: {ex.Message}");
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

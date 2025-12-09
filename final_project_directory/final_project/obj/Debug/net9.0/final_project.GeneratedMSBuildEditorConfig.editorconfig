@@ -17,73 +17,73 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = final_project
 build_property.RootNamespace = final_project
-build_property.ProjectDir = /home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/
+build_property.ProjectDir = C:\Users\bugzius\Desktop\Nueva carpeta\programacion_web_1\final_project_directory\final_project\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project
+build_property.MSBuildProjectDirectory = C:\Users\bugzius\Desktop\Nueva carpeta\programacion_web_1\final_project_directory\final_project
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Gastos/create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FzdG9zL2NyZWF0ZS5jc2h0bWw=
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Gastos/create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FzdG9zXGNyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Gastos/delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FzdG9zL2RlbGV0ZS5jc2h0bWw=
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Gastos/delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FzdG9zXGRlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Gastos/details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FzdG9zL2RldGFpbHMuY3NodG1s
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Gastos/details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FzdG9zXGRldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Gastos/edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FzdG9zL2VkaXQuY3NodG1s
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Gastos/edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FzdG9zXGVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Gastos/index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2FzdG9zL2luZGV4LmNzaHRtbA==
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Gastos/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FzdG9zXGluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Presupuesto/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJlc3VwdWVzdG8vQ3JlYXRlLmNzaHRtbA==
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Presupuesto/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlc3VwdWVzdG9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Presupuesto/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJlc3VwdWVzdG8vRWRpdC5jc2h0bWw=
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Presupuesto/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlc3VwdWVzdG9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Presupuesto/index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJlc3VwdWVzdG8vaW5kZXguY3NodG1s
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Presupuesto/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlc3VwdWVzdG9caW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-3eyl6f6x35
+[C:/Users/bugzius/Desktop/Nueva carpeta/programacion_web_1/final_project_directory/final_project/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-n5tha9r98k

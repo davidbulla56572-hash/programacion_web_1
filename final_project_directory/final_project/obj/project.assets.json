@@ -2784,19 +2784,19 @@
     ]
   },
   "packageFolders": {
-    "/home/bugzius/.nuget/packages/": {}
+    "C:\\Users\\bugzius\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/final_project.csproj",
+      "projectUniqueName": "C:\\Users\\bugzius\\Desktop\\Nueva carpeta\\programacion_web_1\\final_project_directory\\final_project\\final_project.csproj",
       "projectName": "final_project",
-      "projectPath": "/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/final_project.csproj",
-      "packagesPath": "/home/bugzius/.nuget/packages/",
-      "outputPath": "/home/bugzius/Documents/estudio/programacion_web_1/final_project_directory/final_project/obj/",
+      "projectPath": "C:\\Users\\bugzius\\Desktop\\Nueva carpeta\\programacion_web_1\\final_project_directory\\final_project\\final_project.csproj",
+      "packagesPath": "C:\\Users\\bugzius\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bugzius\\Desktop\\Nueva carpeta\\programacion_web_1\\final_project_directory\\final_project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/bugzius/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\bugzius\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -2860,7 +2860,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/bugzius/.dotnet/sdk/9.0.308/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
